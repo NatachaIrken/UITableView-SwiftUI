@@ -41,10 +41,7 @@ struct SMSTCView:View {
 	
 	
 	var body: some View {
-		
-		//        VStack{
-			
-			Image("topImage")
+		Image("topImage")
 			.ignoresSafeArea()
 			.frame(width: UIScreen.main.bounds.width)
 		
@@ -54,46 +51,33 @@ struct SMSTCView:View {
 		}
 		.padding(.horizontal, 16)
 		.padding(.top, 32)
-		// hstack
-		
+
 		Color(red: 0.79, green: 0.81, blue: 0.84)
 			.frame(height: 1.0)
 			.frame(width: UIScreen.main.bounds.width)
 			.padding(.top, 2)
-		//separador
 		Spacer()
-		
-		ScrollView {
-			VStack {
-				ForEach(items.indices, id: \.self) { index in
-					AccordionSection(
-						title: items[index].0,
-						content: items[index].1,
-						isExpanded: expandedIndices.contains(index),
-						toggle: {
-							//withAnimation {
-							if expandedIndices.contains(index) {
-								expandedIndices.remove(index)
-							} else {
-								expandedIndices.insert(index)
-								//}
-							}
+		ScrollView  {
+			ForEach(items.indices, id: \.self) { index in
+				AccordionSection(
+					title: items[index].0,
+					content: items[index].1,
+					isExpanded: expandedIndices.contains(index),
+					toggle: {
+						if expandedIndices.contains(index) {
+							expandedIndices.remove(index)
+						} else {
+							expandedIndices.insert(index)
 						}
-					)
-					.cornerRadius(2)
-					.padding(.vertical, 4)
-					
-				}//foreach
+					}
+				)
+				.padding(.vertical, 4)
 			}
 		}
 		.listStyle(PlainListStyle())
 		.padding(.horizontal, 24)
 		.padding(.top, 36)
-			
-			//		Spacer()
-			
 		.background(.white)
-		//        .ignoresSafeArea()
 		.background(.white)
 		.padding(.horizontal, 16)
 	}
@@ -103,17 +87,20 @@ struct ToolbarFrecuentlyQuestion: View {
 	
 	@Environment(\.presentationMode) var presentationMode
 	var body: some View {
-		Text("PREGUNTAS FRECUENTES")
-			.font(Font.custom("Cera Pro", size: 12))
-			.fontWeight(.semibold)
-			.foregroundStyle(Color(red: 0.29, green: 0.30, blue: 0.40))
-		
-		Spacer()
-		
-		Button(action: {
-			self.presentationMode.wrappedValue.dismiss()
-		}) {
-			Image("cerrarTC")
+		HStack {
+			Text("PREGUNTAS FRECUENTES")
+				.font(Font.custom("Cera Pro", size: 12))
+				.fontWeight(.semibold)
+				.foregroundStyle(Color(red: 0.29, green: 0.30, blue: 0.40))
+				.padding(10)
+			
+			Spacer()
+			
+			Button(action: {
+				self.presentationMode.wrappedValue.dismiss()
+			}) {
+				Image("cerrarTC")
+			}
 		}
 	}
 }
